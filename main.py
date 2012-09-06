@@ -4,9 +4,11 @@ import pygtk
 pygtk.require('2.0')
 import gtk
 
+import webbrowser
 import urllib2
+from xml.dom.minidom import parseString
 
-class BoxLinux:
+class SignInBoxLinux:
 
 #how to do global vars in python?
 global apikey
@@ -22,10 +24,34 @@ apikey = l7c2il3sxmetf2ielkyxbvc2k4nqqkm4
 	def signin(self, widget, data=None):
 		print("Sign in!")
 		
-	def authenticate():
+	def authenticate(self, widget, data=None):
+		#these need to be changed to add in https checking
 		response = urllib2.urlopen("https://www.box.com/api/1.0/rest?action=get_ticket&api_key="+apikey)
 		xml = response.read()
+		dom = parseString(xml)
+		#this doesn't work right it will return something else with the ticket
+		ticket = dom.getElementsByTagName('ticket')[0].toxml()
 		
+		#open web browser and make user authenticate Box.com account
+		webbrowser.open("https://www.box.com/api/1.0/auth/"+ticket)
+		
+		#pop up dialog box and wait for user to click next
+		#might need more init vars
+		self.waitingbox = gtk.Dialog(title="Waiting for Sign in")
+		#I have no idea how to use the Response_Id variable
+		self.waitingbox.add_button("Finished", whatgoeshere)
+		self.waitingbox.show()
+		return ticket
+		
+	def auth_token_data(self, widget, data=None, ticket):
+		#trigger this after getting response from self.waitingbox
+		#add support for https checking
+		response = urllib2.urlopen("https://www.box.com/api/1.0/rest?action=get_auth_token&api_key="+apikey+"&ticket="self.ticket)
+		xml = response.read()
+		dom = parseString(xml)
+		
+		return dom
+		#should return multiple strings or just the xml file and make method to fetch?
 		
 	def __init__(self):
 		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
@@ -77,5 +103,5 @@ apikey = l7c2il3sxmetf2ielkyxbvc2k4nqqkm4
 
 
 if __name__ == "__main__":
-	Box = BoxLinux()
+	Box = SignInBoxLinux()
 	Box.main()
