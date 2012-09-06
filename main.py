@@ -8,6 +8,10 @@ import urllib2
 
 class BoxLinux:
 
+#how to do global vars in python?
+global apikey
+apikey = l7c2il3sxmetf2ielkyxbvc2k4nqqkm4
+
 	def destroy(self, widget, data=None):
 		gtk.main_quit()
 		
@@ -17,6 +21,11 @@ class BoxLinux:
 		
 	def signin(self, widget, data=None):
 		print("Sign in!")
+		
+	def authenticate():
+		response = urllib2.urlopen("https://www.box.com/api/1.0/rest?action=get_ticket&api_key="+apikey)
+		xml = response.read()
+		
 		
 	def __init__(self):
 		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
