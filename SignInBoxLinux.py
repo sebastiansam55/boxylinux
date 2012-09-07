@@ -24,7 +24,8 @@ class SignInBoxLinux:
 	def signin(self, widget, data=None):
 		print("Sign in!")
 		ticket = self.authenticate()
-		self.auth_token_data(ticket, self, widget, data=None)
+		global BoxUserData
+		BoxUserData = self.auth_token_data(ticket)
 		
 	def authenticate(self):
 		#these need to be changed to add in https checking
@@ -34,19 +35,27 @@ class SignInBoxLinux:
 		#this doesn't work right it will return something else with the ticket
 		#global ticket
 		ticket = dom.getElementsByTagName('ticket')[0].toxml()
-		
+		ticket = ticket.replace('<ticket>', '').replace("</ticket>","")
+		print ticket
 		#open web browser and make user authenticate Box.com account
 		webbrowser.open("https://www.box.com/api/1.0/auth/"+ticket)
 		
 		#pop up dialog box and wait for user to click next
-		#might need more init vars
-		self.waitingbox = gtk.Dialog(title="Waiting for Sign in")
-		#I have no idea how to use the Response_Id variable
-		self.waitingbox.add_button("Finished", whatgoeshere)
-		self.waitingbox.show()
+		self.waitWindow = gtk.Window(gtk.WINDOW_TOPLEVEL)
+		self.waitingforauth = gtk.Label("Click continue after approving the Box App")
+		self.continuebtn = gtk.Button("Continue")
+		self.continuebtn.connect("clicked", self.mainAppLaunch, None)
+		self.vbox2 = gtk.VBox(False, 0)
+		self.vbox2.pack_start(self.waitingforauth, True, True, 0)
+		self.vbox2.pack_start(self.continuebtn, True, True, 0)
+		self.waitWindow.add(self.vbox2)
+		self.vbox2.show()
+		self.waitWindow.show()
+		self.continuebtn.show()
+		self.waitingforauth.show()
 		return ticket
 		
-	def auth_token_data(ticket, self, widget, data=None):
+	def auth_token_data(self, ticket):
 		#trigger this after getting response from self.waitingbox
 		#add support for https checking
 		response = urllib2.urlopen("https://www.box.com/api/1.0/rest?action=get_auth_token&api_key="+apikey+"&ticket="+ticket)
@@ -55,6 +64,13 @@ class SignInBoxLinux:
 		
 		return dom
 		#should return multiple strings or just the xml file and make method to fetch?
+		
+	def mainAppLaunch(self, widget, data=None):
+		#destroy the two previous dialogs...
+		self.window.set_visible(False)
+		self.waitWindow.set_visible(False)
+		print "Launching!"
+		return
 		
 	def __init__(self):
 		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
@@ -102,9 +118,15 @@ class SignInBoxLinux:
 		self.window.show()
 		self.setTest()
 		
+		
+		
+		
+		
+		
 	def setTest(self):
-		self.password.set_text("EshTwooc")
-		self.username.set_text("sebastiansam55@gmail.com")
+		#don't abuse the test user!
+		self.password.set_text("password")
+		self.username.set_text("samsebastian@narod.ru")
 			
 		
 	def main(self):
