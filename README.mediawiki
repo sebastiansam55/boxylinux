@@ -4,6 +4,6 @@ This project is to bring a native Box client to the Linux desktop. I'm going for
 
 
 ==== Links ====
-Box Documentation (http://developers.box.com/)
-Python Documentation (http://docs.python.org/)
-PyGTK Documentation (http://developer.gnome.org/pygtk/stable/)
+Box Documentation (http://developers.box.com/)<br>
+Python Documentation (http://docs.python.org/)<br>
+PyGTK Documentation (http://developer.gnome.org/pygtk/stable/)<br>
