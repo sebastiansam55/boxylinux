@@ -1,9 +1,5 @@
 == Box For Linux ==
 
-This project is to bring a native Box client to the Linux desktop. I'm going for a dropbox-like approach to the way the files are handled, instead of the WebDav nothing but straight BOX APIs.
+As of about October 2012 I stopped working on this and decided to first start on a command line based verison of a Box client and go from there.
 
-
-==== Links ====
-Box Documentation (http://developers.box.com/)<br>
-Python Documentation (http://docs.python.org/)<br>
-PyGTK Documentation (http://developer.gnome.org/pygtk/stable/)<br>
+[https://github.com/sebastiansam55/boxlinux]
