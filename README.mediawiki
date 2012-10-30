@@ -2,4 +2,6 @@
 
 As of about October 2012 I stopped working on this and decided to first start on a command line based verison of a Box client and go from there.
 
-[https://github.com/sebastiansam55/boxlinux]
+This is the repository for the command line version: [https://github.com/sebastiansam55/boxlinux]
+
+I will, after I'm satisfied with the command line version come back here and start working on it again.
