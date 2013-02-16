@@ -1,0 +1,8 @@
+[Desktop Entry]
+_Name=Boxylinux
+_Comment=Boxylinux application
+Categories=GNOME;Utility;
+Exec=boxylinux
+Icon=boxylinux
+Terminal=false
+Type=Application
