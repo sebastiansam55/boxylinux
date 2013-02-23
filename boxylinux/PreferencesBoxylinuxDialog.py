@@ -26,10 +26,25 @@ class PreferencesBoxylinuxDialog(PreferencesDialog):
     def finish_initializing(self, builder): # pylint: disable=E1002
         """Set up the preferences dialog"""
         super(PreferencesBoxylinuxDialog, self).finish_initializing(builder)
+        
+        self.sync = ""
 
         # Bind each preference widget to gsettings
-        settings = Gio.Settings("net.launchpad.boxylinux")
-        widget = self.builder.get_object('example_entry')
-        settings.bind("example", widget, "text", Gio.SettingsBindFlags.DEFAULT)
+        #settings = Gio.Settings("net.launchpad.boxylinux")
+        #widget = self.builder.get_object('syncDirChooser')
+        #settings.bind("filechoice", widget, "file", Gio.SettingsBindFlags.DEFAULT)
+        
 
         # Code for other initialization actions should be added here.
+        self.test = ''
+	
+	#handler goes here?
+	def syncDir(self, widget):
+		self.sync = self.builder.get_object('syncDirChooser').get_filename()
+		
+		
+	def saveSettings():
+		print("Saving settings!")
+		f = open(".boxylinux", "w")
+		#f.write("
+		f.close()

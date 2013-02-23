@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="boxylinux">
   <schema id="net.launchpad.boxylinux" path="/net/launchpad/boxylinux/">
-    <key name="example" type="s">
+    <key name="filechoice" type="s">
       <default>''</default>
-      <summary>Sample setting</summary>
-      <description>Longer description of this sample setting.  Talk about allowed values and what it does.</description>
+      <summary>Sync Dir</summary>
+      <description>Location of where the files should be sync`d to</description>
     </key>
   </schema>
 </schemalist>

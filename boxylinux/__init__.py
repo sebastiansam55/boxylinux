@@ -28,6 +28,7 @@ def parse_options():
 def main():
     'constructor for your class instances'
     parse_options()
+    
 
     # Run the application.    
     window = BoxylinuxWindow.BoxylinuxWindow()
